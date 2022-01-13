@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
-
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Fragment, useState } from "react";
+import { Container, InputGroup, FormControl } from "react-bootstrap";
+import "./App.css";
+import CountryList from "./components/CountryList";
+import Header from "./components/Header";
+import { FaSearch } from "react-icons/fa";
 function App() {
+  const [searchTeam, setSearchTeam] = useState("");
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <Header />
+      <Container>
+        <InputGroup className="mb-5 mt-3 w-md-50 w-100">
+          <InputGroup.Text>
+            <FaSearch />
+          </InputGroup.Text>
+          <FormControl
+            aria-label="First name"
+            onChange={(e) => {
+              setSearchTeam(e.target.value);
+            }}
+          />
+        </InputGroup>
+      </Container>
+
+      <CountryList searchCountry={searchTeam} />
+    </Fragment>
   );
 }
 
